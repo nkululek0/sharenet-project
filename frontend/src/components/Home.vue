@@ -27,7 +27,7 @@
             <td>{{ spot.fullName }}</td>
             <td>{{ spot.price }} {{ spot.code }}</td>
             <td :class="spot.move < 0 ? 'spot-move-red' : 'spot-move-green'">{{ spot.move }}</td>
-            <td>{{ spot.pmove.toPrecision(3) }} %</td>
+            <td>{{ spot.pmove.toPrecision(2) }} %</td>
             <td>{{ new Date(spot.datetime).toGMTString().split(" GMT")[0] }}</td>
           </tr>
         </tbody>
