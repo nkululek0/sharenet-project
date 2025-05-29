@@ -5,8 +5,8 @@
     </router-link>
     <nav>
       <router-link :to="{ name: 'home' }">Home</router-link>
-      <router-link :to="{ name: 'contactUs' }">Contact Us</router-link>
       <router-link :to="{ name: 'events' }">Events</router-link>
+      <router-link :to="{ name: 'contactUs' }">Contact Us</router-link>
     </nav>
   </div>
   <router-view/>
