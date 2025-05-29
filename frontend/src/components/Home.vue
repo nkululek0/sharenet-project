@@ -14,6 +14,18 @@
           <tr>
             <th class="main-table-heading" colspan="5">Top 5 Latest Spots</th>
           </tr>
+          <tr class="table-filter-container">
+            <td>
+              <label>Sort by: </label>
+              <select id="table-filter" v-model="sortValue">
+                <option value="fullName">Fullname</option>
+                <option value="price">Price</option>
+                <option value="move">Move</option>
+                <option value="pmove">Percentage Move</option>
+                <option value="datetime">Time</option>
+              </select>
+            </td>
+          </tr>
         </thead>
         <tbody>
           <tr>
@@ -23,11 +35,11 @@
             <th>Percentage Move</th>
             <th>Time</th>
           </tr>
-          <tr v-for="spot in spotPrices" :key="spot.tickerId" class="spot-value-row">
+          <tr v-for="spot in sortSpotsTable(sortValue)" :key="spot.tickerId" class="spot-value-row">
             <td>{{ spot.fullName }}</td>
-            <td>{{ spot.price }} {{ spot.code }}</td>
+            <td>{{ spot.price }}</td>
             <td :class="spot.move < 0 ? 'spot-move-red' : 'spot-move-green'">{{ spot.move }}</td>
-            <td>{{ spot.pmove.toPrecision(2) }} %</td>
+            <td>{{ spot.pmove.toFixed(2) }} %</td>
             <td>{{ new Date(spot.datetime).toGMTString().split(" GMT")[0] }}</td>
           </tr>
         </tbody>
@@ -43,6 +55,26 @@ export default {
     pageHeading: String,
     userDetails: Object,
     spotPrices: Array
+  },
+  data() {
+    return {
+      sortValue: "fullName"
+    }
+  },
+  methods: {
+     sortSpotsTable (sortValue) {
+      const self = this;
+
+      if (sortValue) {
+        self.spotPrices.sort((firstItem, secondItem) => {
+          let firstItemSortValue = firstItem[sortValue];
+          let secondItemSortValue = secondItem[sortValue];
+
+          return firstItemSortValue < secondItemSortValue ? -1 : 1;
+        });
+      }
+      return self.spotPrices;
+    }
   }
 }
 </script>
@@ -52,17 +84,21 @@ export default {
     margin-top: 20px;
   }
 
-  .home-main-container .spots-table tbody {
+  .home-main-content .table-filter-container {
     text-align: left;
-  }
-
-  .home-main-container .spots-table {
-      width: 100%;
   }
 
   .home-main-container .main-table-heading {
     font-size: 1.6rem;
     text-decoration: underline;
     padding: 10px;
+  }
+
+  .home-main-container .spots-table {
+      width: 100%;
+  }
+
+  .home-main-container .spots-table tbody {
+    text-align: left;
   }
 </style>
