@@ -14,6 +14,11 @@ const routes = [
     component: () => import('@/views/ContactUsView.vue')
   },
   {
+    path: '/events',
+    name: 'events',
+    component: () => import('@/views/EventsView.vue')
+  },
+  {
     path: '/:catchAll(.*)',
     name: 'notFound',
     component: NotFoundView

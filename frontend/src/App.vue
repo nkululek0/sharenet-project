@@ -6,6 +6,7 @@
     <nav>
       <router-link :to="{ name: 'home' }">Home</router-link>
       <router-link :to="{ name: 'contactUs' }">Contact Us</router-link>
+      <router-link :to="{ name: 'events' }">Events</router-link>
     </nav>
   </div>
   <router-view/>
@@ -35,7 +36,7 @@
 
 #app .app-main-heading-container {
     padding-top: 1rem;
-    background-color: #F5F7F9;
+    background-color: #eaeef2;
 }
 
 #app .main-content-container {
