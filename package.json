@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\" \"npm run migrate:up\"",
+    "server": "npm --prefix backend run start",
+    "client": "npm --prefix frontend run serve",
+    "migrate:up": "npm --prefix backend run db-migrate:up",
+    "migrate:down": "npm --prefix backend run db-migrate:down"
+  },
+  "dependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
