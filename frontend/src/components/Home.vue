@@ -1,17 +1,19 @@
 <template>
   <div class="home-main-container">
-    <h1 class="main-page-heading">{{ pageHeading }}</h1>
-    <div class="view-header-details">
-      <div class="user-details">
+    <div class="component-heading-container">
+      <div class="greeting-container">
+        <h1 class="main-page-heading">{{ pageHeading }}</h1>
         <p class="username">{{ userDetails.username }}</p>
-        <p class="user-email">{{ userDetails.email }}</p>
-        <p class="user-role">{{ userDetails.role }}</p>
+      </div>
+      <div class="view-header-details">
+        <p class="user-email"><b>Email:</b> {{ userDetails.email }}</p>
+        <p class="user-role"><b>Role:</b> {{ userDetails.role }}</p>
       </div>
     </div>
     <div class="home-main-content" v-if="spotPrices.length > 0">
       <table class="spots-table">
         <thead>
-          <tr>
+          <tr class="main-table-heading-parent">
             <th class="main-table-heading" colspan="5">Top 5 Latest Spots</th>
           </tr>
           <tr class="table-filter-container">
@@ -38,8 +40,8 @@
           <tr v-for="spot in sortSpotsTable(sortValue)" :key="spot.tickerId" class="spot-value-row">
             <td>{{ spot.fullName }}</td>
             <td>{{ spot.price }}</td>
-            <td :class="spot.move < 0 ? 'spot-move-red' : 'spot-move-green'">{{ spot.move }}</td>
-            <td>{{ spot.pmove.toFixed(2) }} %</td>
+            <td :class="spot.move < 0 ? 'red' : 'green'">{{ spot.move }}</td>
+            <td :class="spot.pmove.toFixed(2) < 0 ? 'red' : 'green'">{{ spot.pmove.toFixed(2) }} %</td>
             <td>{{ new Date(spot.datetime).toGMTString().split(" GMT")[0] }}</td>
           </tr>
         </tbody>
@@ -79,23 +81,68 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+  .red {
+    color: rgb(248, 5, 5);
+  }
+
+  .green {
+    color: rgb(5, 230, 5);
+  }
+
   .home-main-content {
     margin-top: 20px;
   }
 
-  .home-main-content .table-filter-container {
+  .component-heading-container {
+    margin-bottom: 2.6rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .greeting-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .view-header-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.2rem;
+  }
+
+  .table-filter-container {
     text-align: left;
   }
 
-  .home-main-container .main-table-heading {
+  .main-table-heading-parent {
+    background-color: #152D4D;
+    color: #fff;
+  }
+
+  .main-table-heading {
     font-size: 1.6rem;
-    text-decoration: underline;
     padding: 10px;
   }
 
   .home-main-container .spots-table {
       width: 100%;
+      border: 1px solid #000;
+  }
+
+  .table-filter-container td {
+    padding: 1rem 0;
+  }
+
+  .spot-value-row:nth-child(even) {
+    background-color: #eaeef2;
+  }
+
+  .spot-value-row td {
+    padding: 0.3rem;
   }
 
   .home-main-container .spots-table tbody {

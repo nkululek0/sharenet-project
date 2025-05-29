@@ -4,7 +4,7 @@
       <img src="@/assets/logo.png" alt="sharenet log" class="logo">
     </router-link>
     <nav>
-      <router-link :to="{ name: 'home' }">Home</router-link> |
+      <router-link :to="{ name: 'home' }">Home</router-link>
       <router-link :to="{ name: 'about' }">About</router-link>
     </nav>
   </div>
@@ -24,34 +24,47 @@
   text-align: center;
   color: #2c3e50;
   width: 100vw;
-  padding: 15px;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  height: 100vh;
 }
 
 #app .logo {
   width: 150px;
 }
 
-.app-main-heading-container {
-    text-align: left;
-    display: flex;
-    align-items: center;
+#app .app-main-heading-container {
+    padding-top: 1rem;
+    background-color: #F5F7F9;
+}
+
+#app .main-content-container {
+    padding: 1rem;
 }
 
 #app .logo-container {
   display: inline-block;
   margin-right: 20px;
-}
-#app nav {
-  /* padding: 30px; */
-  display: inline-block;
+  margin-bottom: 1rem;
 }
 
-nav a {
+#app nav {
+  display: block;
+}
+
+#app nav a {
+  height: 2.5rem;
+  display: block;
   font-weight: bold;
   color: #2c3e50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-nav a.router-link-exact-active {
-  color: #42b983;
+#app nav a.router-link-exact-active {
+  color: #000;
+  background-color: #fff;
+  text-decoration: none;
 }
 </style>
