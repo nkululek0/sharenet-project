@@ -9,9 +9,9 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/about',
-    name: 'about',
-    component: () => import('@/views/AboutView.vue')
+    path: '/contact-us',
+    name: 'contactUs',
+    component: () => import('@/views/ContactUsView.vue')
   },
   {
     path: '/:catchAll(.*)',
